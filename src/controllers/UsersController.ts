@@ -1,15 +1,18 @@
+// import 'reflect-metadata'
 import { Controller, Param, Body, Get, Post, Delete, Patch, Ctx } from 'routing-controllers'
 // import { ProductEntity } from '../entities/ProductEntity'
-import { CTX } from '../interfaces/CTXInterfaces'
+// import { CTX } from '../interfaces/CTXInterfaces'
+// import { UserServices } from '../services'
 
-@Controller('/users/API')
-export class UserController {
-
+@Controller('/users')
+export class UsersController {
+    // constructor(private readonly userServices: UserServices) {}
     @Get('/GetAll')
-    getAll(@Ctx() ctx: CTX) {
+    getAll() {
+        // getAll(@Ctx() ctx: CTX) {
         // ctx.db.getRepository(ProductEntity).find
         return {
-            msg: 'Return GetAll'
+            koa: 'HI'
         }
     }
 

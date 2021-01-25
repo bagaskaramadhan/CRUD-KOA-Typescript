@@ -5,23 +5,31 @@ import { ENVConfig } from './src/helpers/Env'
 // const server = new Koa();
 // const router = new KoaRouter();
 import { connectWithDB } from './src/configs/ConfigDBMS'
-import { router } from './src/routes/router'
-import { UserController } from './src/controllers'
-import { createKoaServer } from 'routing-controllers'
+// import { router } from './src/routes/router'
+import { UsersController } from './src/controllers'
+import { createKoaServer, useContainer } from 'routing-controllers'
+// import { services } from './src/services'
+import { Container } from 'typedi'
 
 const StartServer = async () => {
     const server: Koa<DefaultState, DefaultContext> = createKoaServer({
-        controllers: [UserController]
+        controllers: [UsersController]
     })
     await connectWithDB(server)
+    // services.forEach((service) => {
+    //     // Container
+    //     Container.set(service, new service(server.context.db))
+    // })
+    // useContainer(Container)
     // router.get("/", (ctx) => (ctx.body = "HELLOs"));
 
-    server.use(router.routes()).use(router.allowedMethods());
+    // server.use(router.routes()).use(router.allowedMethods());
 
-    server.listen(ENVConfig.PORT, () => {
-        console.log(`SERVER STARTED ON PORT ${ENVConfig.PORT}`);
-        console.log(`TEST ON http://localhost:${ENVConfig.PORT}/users/API/`);
-    });
+    server
+        .listen(ENVConfig.PORT)
+        .on('listening', () =>
+            console.log(`SERVER STARTED ON PORT ${ENVConfig.PORT}`)
+        )
 
 }
 
