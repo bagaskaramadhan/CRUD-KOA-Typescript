@@ -14,3 +14,5 @@ export class ProductEntity {
     address: string
 
 }
+
+// entitas di export ke configDBMS, Controller

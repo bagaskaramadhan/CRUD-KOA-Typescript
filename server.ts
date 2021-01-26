@@ -9,22 +9,20 @@ const PORT = 3000
 
 const startServer = async () => {
 
+    //buat method yang berisi Koa dengan didalamnnya ada DefaultState(mengimplementasikan),
+    // DefaultContext(mengeksekusi) dengan membuat Koa Server yang di isi dengan data controller
+    // yang berisi clas UnitControllers di src/Controller
     const server: Koa<DefaultState, DefaultContext> = createKoaServer({
         controllers: [UnitControllers]
     })
+    // connectWithDB yang diisi method server
     await connectWithDB(server)
     services.forEach((service) => {
         Container.set(service, new service(server.context.db))
     })
     useContainer(Container)
 
-    server
-        .listen(PORT)
-        .on('listening', () =>
-            console.log(
-                `SERVER STARTED ON PORT ${PORT}`
-            )
-        )
+    server.listen(PORT).on('listening', () => console.log(`SERVER STARTED ON PORT ${PORT}`))
 }
 
 startServer()

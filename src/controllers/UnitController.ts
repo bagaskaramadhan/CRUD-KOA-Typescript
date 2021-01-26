@@ -6,7 +6,7 @@ import {
     Delete,
     Patch,
     Ctx,
-    JsonController
+    Controller
 } from 'routing-controllers'
 import { CTX } from '../interfaces'
 import { UsersService } from '../services'
@@ -14,7 +14,7 @@ import { ProductEntity } from '../entities/ProductEntity'
 import { DeepPartial } from 'typeorm'
 import { Service } from 'typedi'
 
-@JsonController('/users')
+@Controller('/users')
 @Service()
 export class UnitControllers {
     constructor(private readonly usersService: UsersService) { }
