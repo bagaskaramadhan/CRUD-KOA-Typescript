@@ -1,46 +1,63 @@
-// import 'reflect-metadata'
-import { Controller, Param, Body, Get, Post, Delete, Patch, Ctx } from 'routing-controllers'
-// import { ProductEntity } from '../entities/ProductEntity'
-// import { CTX } from '../interfaces/CTXInterfaces'
-// import { UserServices } from '../services'
+import {
+    Param,
+    Body,
+    Get,
+    Post,
+    Delete,
+    Patch,
+    Ctx,
+    JsonController,
+    // UnauthorizedError,
+    // Authorized,
+    // CurrentUser,
+} from 'routing-controllers'
+import { CTX } from '../interfaces'
+import { UsersService } from '../services'
+import { ProductEntity } from '../entities/ProductEntity'
+import { DeepPartial } from 'typeorm'
+import { Service } from 'typedi'
 
-@Controller('/users')
-export class UsersController {
-    // constructor(private readonly userServices: UserServices) {}
-    @Get('/GetAll')
-    getAll() {
-        // getAll(@Ctx() ctx: CTX) {
-        // ctx.db.getRepository(ProductEntity).find
-        return {
-            koa: 'HI'
-        }
+@JsonController('/users')
+@Service()
+export class UnitControllers {
+    constructor(private readonly usersService: UsersService) { }
+
+    @Get()
+    getAll(@Ctx() ctx: CTX) {
+        // ctx.db.getRepository(ProductEntity).find()
+        return this.usersService.getData()
     }
 
-    @Get('/GetID/:id')
-    getOne(@Param('id') id: number) {
-        return `Return ID ${id} By ID`
+    @Get('/:id')
+    // @Authorized()
+    getOne(
+        @Param('id') id: number,
+        // @CurrentUser() user: DeepPartial<ProductEntity>
+    ): Promise<ProductEntity> {
+        // console.log(user)
+        return this.usersService.getById(id)
     }
 
-    @Post('/Insert')
-    post(@Body() user: any) {
-        return {
-            saved: true,
+    @Post()
+    async post(@Body() user: DeepPartial<ProductEntity>) {
+        const instance: DeepPartial<ProductEntity> = this.usersService.getInstance(
             user
-        }
+        )
+        return this.usersService.create(user, instance)
     }
 
-    @Patch('/Update/:id')
-    put(@Param('id') id: number, @Body() user: any) {
-        return {
-            update: true,
-            user,
-            id
-        }
+    @Patch('/:id')
+    // @Authorized()
+    async patch(@Param('id') id: number, @Body() user: Partial<ProductEntity>) {
+        const instance: DeepPartial<ProductEntity> = this.usersService.getInstance(
+            user
+        )
+        return this.usersService.update(id, user)
     }
 
-    @Delete('/Remove/:id')
+    @Delete('/:id')
+    // @Authorized()
     remove(@Param('id') id: number) {
-        return `Remove id ${id}`
+        return this.usersService.del(id)
     }
-
 }

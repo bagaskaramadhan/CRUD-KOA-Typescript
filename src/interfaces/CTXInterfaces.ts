@@ -1,6 +1,6 @@
-// import { Connection } from "typeorm";
-// import { Context } from "koa";
+import { Context } from 'koa'
+import { Connection } from 'typeorm'
 
-// export interface CTX extends Context{
-//     db: Connection
-// }
+export interface CTX extends Context {
+  db: Connection
+}

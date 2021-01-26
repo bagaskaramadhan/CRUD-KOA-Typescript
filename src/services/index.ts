@@ -1,5 +1,5 @@
-// export { UserServices } from './UserServices'
+export { UsersService } from './Service'
 
-// import { UserServices } from './UserServices'
+import { UsersService } from './Service'
 
-// export const services = [UserServices]
+export const services = [UsersService]
