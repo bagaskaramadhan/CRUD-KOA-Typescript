@@ -1,5 +1,5 @@
 import { Repository, DeepPartial, ObjectLiteral } from 'typeorm'
-import { ProductEntity } from '../entities/ProductEntity'
+// import { ProductEntity } from '../entities/ProductEntity'
 
 export class BaseService<T> {
     public readonly repo: Repository<T>

@@ -2,9 +2,6 @@ import * as Koa from 'koa'
 import { DefaultState, DefaultContext } from 'koa'
 import { Connection, createConnection } from 'typeorm'
 import { ENVConfig } from '../helpers/Env'
-// import { PostsEntity } from '../entities/PostEntity'
-// import { UserEntity } from '../entities/UserEntity'
-// import { ContohEntity } from '../entities/ContohEntity'
 import { ProductEntity } from '../entities/ProductEntity'
 import 'reflect-metadata'
 
@@ -18,7 +15,6 @@ export const connectWithDB = async (
         password: ENVConfig.PASS,
         database: ENVConfig.NAME,
         entities: [ProductEntity]
-        // entities: [UserEntity, PostsEntity, ContohEntity, ProductEntity]
     })
 
     await connection.synchronize(true)

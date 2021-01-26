@@ -6,10 +6,7 @@ import {
     Delete,
     Patch,
     Ctx,
-    JsonController,
-    // UnauthorizedError,
-    // Authorized,
-    // CurrentUser,
+    JsonController
 } from 'routing-controllers'
 import { CTX } from '../interfaces'
 import { UsersService } from '../services'
@@ -24,17 +21,13 @@ export class UnitControllers {
 
     @Get()
     getAll(@Ctx() ctx: CTX) {
-        // ctx.db.getRepository(ProductEntity).find()
         return this.usersService.getData()
     }
 
     @Get('/:id')
-    // @Authorized()
     getOne(
         @Param('id') id: number,
-        // @CurrentUser() user: DeepPartial<ProductEntity>
     ): Promise<ProductEntity> {
-        // console.log(user)
         return this.usersService.getById(id)
     }
 
@@ -47,7 +40,6 @@ export class UnitControllers {
     }
 
     @Patch('/:id')
-    // @Authorized()
     async patch(@Param('id') id: number, @Body() user: Partial<ProductEntity>) {
         const instance: DeepPartial<ProductEntity> = this.usersService.getInstance(
             user
@@ -56,7 +48,6 @@ export class UnitControllers {
     }
 
     @Delete('/:id')
-    // @Authorized()
     remove(@Param('id') id: number) {
         return this.usersService.del(id)
     }

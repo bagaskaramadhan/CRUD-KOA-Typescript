@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 @Entity('product') //Table
 export class ProductEntity {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn() // Primary Key
     id: number
 
     @Column({ name: 'name', nullable: false })
