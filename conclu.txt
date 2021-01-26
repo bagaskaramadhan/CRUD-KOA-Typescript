@@ -1,0 +1,18 @@
+configs = tempat menginitial database
+
+controllers = tempat mengeksekusi method untuk entities/table
+
+entities = tempat untuk menginitial isi table
+
+helper = pendukung
+
+interfaces = {
+    CTXInterfaces: berisi interface CTX yang menghimpun Context dari Koa
+            untuk membuat properti db dengan berisi Connection yang di import dari module typeorm
+}
+
+services = {
+    BaseService: berisi Class yang berisi Model,
+    Service: berisi Class yang menghimpun BaseService/Model untuk mengkoneksikan ke entities
+    index: mengimport dan mengekspor Class Service dengan nama yang lebih simpel
+}
