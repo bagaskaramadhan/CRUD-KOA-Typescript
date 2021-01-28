@@ -1,5 +1,8 @@
-export { UsersService } from './Service'
+// export { UsersService } from './Service'
 
 import { UsersService } from './Service'
-
-export const services = [UsersService]
+import {DetailsService} from './detailsService'
+import { CustomerService } from './customerService'
+export const userServices = [UsersService]
+export const detailsService = [DetailsService]
+export const customerService = [CustomerService]

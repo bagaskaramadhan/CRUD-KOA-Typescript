@@ -4,6 +4,11 @@ import { Connection, createConnection } from 'typeorm'
 import { ENVConfig } from '../helpers/Env'
 import { ProductEntity } from '../entities/ProductEntity'
 import 'reflect-metadata'
+import { Details } from '../entities/oneToOne/details'
+import { Customer } from '../entities/oneToOne/customer'
+import { StudentEntity } from '../entities/oneToMany/studentEntity'
+import { ProjectEntity } from '../entities/oneToMany/projectEntity'
+import { ValueEntity } from '../entities/oneToMany/valueEntity'
 
 export const connectWithDB = async (
     server: Koa<DefaultState, DefaultContext>
@@ -14,7 +19,7 @@ export const connectWithDB = async (
         username: ENVConfig.USER,
         password: ENVConfig.PASS,
         database: ENVConfig.NAME,
-        entities: [ProductEntity]
+        entities: [ProductEntity, Details,Customer, StudentEntity, ProjectEntity, ValueEntity]
     })
 
     await connection.synchronize(true)

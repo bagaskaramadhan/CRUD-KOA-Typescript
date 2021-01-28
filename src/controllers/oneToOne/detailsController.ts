@@ -8,16 +8,16 @@ import {
     Ctx,
     Controller
 } from 'routing-controllers'
-import { CTX } from '../interfaces'
-import { ProductEntity } from '../entities/ProductEntity'
+import { CTX } from '../../interfaces'
 import { DeepPartial } from 'typeorm'
 import { Service } from 'typedi'
-import { UsersService } from '../services/Service'
+import { DetailsService } from '../../services/detailsService'
+import { Details } from '../../entities/oneToOne/details'
 
-@Controller('/users')
+@Controller('/details')
 @Service()
-export class UnitControllers {
-    constructor(private readonly usersService: UsersService) { }
+export class DetailsController {
+    constructor(private readonly usersService: DetailsService) { }
 
     @Get()
     getAll(@Ctx() ctx: CTX) {
@@ -27,21 +27,21 @@ export class UnitControllers {
     @Get('/:id')
     getOne(
         @Param('id') id: number,
-    ): Promise<ProductEntity> {
+    ): Promise<Details> {
         return this.usersService.getById(id)
     }
 
     @Post()
-    async post(@Body() user: DeepPartial<ProductEntity>) {
-        const instance: DeepPartial<ProductEntity> = this.usersService.getInstance(
+    async post(@Body() user: DeepPartial<Details>) {
+        const instance: DeepPartial<Details> = this.usersService.getInstance(
             user
         )
         return this.usersService.create(user, instance)
     }
 
     @Patch('/:id')
-    async patch(@Param('id') id: number, @Body() user: Partial<ProductEntity>) {
-        const instance: DeepPartial<ProductEntity> = this.usersService.getInstance(
+    async patch(@Param('id') id: number, @Body() user: Partial<Details>) {
+        const instance: DeepPartial<Details> = this.usersService.getInstance(
             user
         )
         return this.usersService.update(id, user)

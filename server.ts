@@ -4,7 +4,7 @@ import { createKoaServer, useContainer } from 'routing-controllers'
 import { connectWithDB } from './src/configs/ConfigDBMS'
 import { UnitControllers } from './src/controllers'
 import { Container } from 'typedi'
-import { services } from './src/services'
+import { userServices } from './src/services'
 const PORT = 3000
 
 const startServer = async () => {
@@ -17,7 +17,7 @@ const startServer = async () => {
     })
     // connectWithDB yang diisi method server
     await connectWithDB(server)
-    services.forEach((service) => {
+    userServices.forEach((service) => {
         Container.set(service, new service(server.context.db))
     })
     useContainer(Container)
