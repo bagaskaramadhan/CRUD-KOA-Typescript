@@ -9,6 +9,8 @@ import { Customer } from '../entities/oneToOne/customer'
 import { StudentEntity } from '../entities/oneToMany/studentEntity'
 import { ProjectEntity } from '../entities/oneToMany/projectEntity'
 import { ValueEntity } from '../entities/oneToMany/valueEntity'
+import { CategoryEntity } from '../entities/manyToMany/categoryEntity'
+import { Question } from '../entities/manyToMany/questionsEntity'
 
 export const connectWithDB = async (
     server: Koa<DefaultState, DefaultContext>
@@ -19,7 +21,7 @@ export const connectWithDB = async (
         username: ENVConfig.USER,
         password: ENVConfig.PASS,
         database: ENVConfig.NAME,
-        entities: [ProductEntity, Details,Customer, StudentEntity, ProjectEntity, ValueEntity]
+        entities: [ProductEntity, Details,Customer, StudentEntity, ProjectEntity, ValueEntity, CategoryEntity,Question]
     })
 
     await connection.synchronize(true)
