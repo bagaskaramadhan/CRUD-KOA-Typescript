@@ -1,12 +1,12 @@
 import 'reflect-metadata'
 import { Service } from 'typedi'
 import { Connection } from 'typeorm'
-import { Customer } from '../entities/oneToOne/customer'
+import { CategoryEntity } from '../entities/manyToMany/categoryEntity'
 import { BaseService } from './BaseService'
 
 @Service()
-export class CustomerService extends BaseService<Customer> {
+export class CategoryService extends BaseService<CategoryEntity> {
   constructor(db: Connection) {
-    super(db.getRepository(Customer))
+    super(db.getRepository(CategoryEntity))
   }
 }
